@@ -5,7 +5,10 @@
 
 - **Demo:**
 ![demo](./img/demo.mp4)
-https://github.com/akhmimabdelilah/control/blob/main/img/demo.mp4
+
+
+https://github.com/akhmimabdelilah/control/assets/148165339/52c0520f-c8cc-4c86-a5f8-c751ce67b718
+
 
 - **Gestion des Categories:**
 ![categorie](./img/categorie.png)
