@@ -5,6 +5,7 @@
 
 - **Demo:**
 ![demo](./img/demo.mp4)
+https://github.com/akhmimabdelilah/control/blob/main/img/demo.mp4
 
 - **Gestion des Categories:**
 ![categorie](./img/categorie.png)
