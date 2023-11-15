@@ -2,15 +2,11 @@ package com.akhmim.entities;
 
 import java.sql.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 public class Article {
@@ -19,15 +15,20 @@ public class Article {
 	private long id;
 	private String nom;
 
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	private Date dateProduction;
 
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
 	private Categorie categorie;
 
 	public Article() {
 		super();
+	}
+
+	public Article(long id) {
+		super();
+		this.id = id;
 	}
 
 	public Article(String nom, Date dateProduction) {
@@ -41,6 +42,14 @@ public class Article {
 		this.id = id;
 		this.nom = nom;
 		this.dateProduction = dateProduction;
+	}
+
+	public Article(long id, String nom, Date dateProduction, Categorie categorie) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.dateProduction = dateProduction;
+		this.categorie = categorie;
 	}
 
 	public long getId() {

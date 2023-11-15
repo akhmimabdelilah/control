@@ -1,5 +1,6 @@
 package com.akhmim.repositories;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,8 @@ import com.akhmim.entities.Article;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-	@Query("SELECT l.produit FROM LigneCommandeProduit l WHERE l.commande.id=:commandeId")
-	List<Article> getArticleByCategory(@Param("commandeId") int commandeId);
+	@Query("SELECT a FROM Article a WHERE categorie.id=:categorieId AND dateProduction BETWEEN :date1 AND :date2")
+	List<Article> findByCategorieBetweenDate(@Param("categorieId") long id, @Param("date1") Date datei,
+			@Param("date2") Date datef);
+
 }

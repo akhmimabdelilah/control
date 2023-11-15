@@ -10,5 +10,6 @@ import com.akhmim.entities.Categorie;
 @Repository
 public interface CategorieRepository extends JpaRepository<Categorie, Long> {
 
-	List<Categorie> findByCategorie(Categorie categorie);
+	public List<Categorie> findByCategorieparent(Categorie categorieparent);
+
 }

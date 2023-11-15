@@ -1,8 +1,10 @@
 package com.akhmim.controllers;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.akhmim.entities.Article;
@@ -30,43 +33,49 @@ public class ArticleController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Object> findById(@PathVariable Long id) {
-		Article professeur = service.findById(id);
-		if (professeur == null) {
+		Article article = service.findById(id);
+		if (article == null) {
 			return new ResponseEntity<Object>("Article avec Id " + id + " nexiste pas", HttpStatus.BAD_REQUEST);
 
 		} else {
-			return ResponseEntity.ok(professeur);
+			return ResponseEntity.ok(article);
 		}
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deletArticle(@PathVariable Long id) {
-		Article professeur = service.findById(id);
-		if (professeur == null) {
+		Article article = service.findById(id);
+		if (article == null) {
 			return new ResponseEntity<Object>("Article avec Id " + id + " nexiste pas", HttpStatus.BAD_REQUEST);
 		} else {
-			service.delete(professeur);
-			return ResponseEntity.ok("professeur avec id " + id + " suprime");
+			service.delete(article);
+			return ResponseEntity.ok("article avec id " + id + " suprime");
 		}
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Object> updateArticle(@PathVariable Long id, @RequestBody Article newprofesseur) {
+	public ResponseEntity<Object> updateArticle(@PathVariable Long id, @RequestBody Article newarticle) {
 
 		Article oldArticle = service.findById(id);
 		if (oldArticle == null) {
-			return new ResponseEntity<Object>("professeur avec id" + id + "nexiste pas ", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Object>("article avec id" + id + "nexiste pas ", HttpStatus.BAD_REQUEST);
 
 		} else {
-			newprofesseur.setId(id);
-			return ResponseEntity.ok(service.update(newprofesseur));
+			newarticle.setId(id);
+			return ResponseEntity.ok(service.update(newarticle));
 		}
 	}
 
 	@PostMapping
-	public Article creatArticle(@RequestBody Article professeur) {
-		professeur.setId(0L);
-		return service.create(professeur);
+	public Article creatArticle(@RequestBody Article article) {
+		article.setId(0L);
+		return service.create(article);
 	}
 
+	@GetMapping("/filterDate")
+	public List<Article> findBycategorieDate(@RequestParam long id,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateDebut,
+			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateFin) {
+		return service.findByCategorieBetweenDate(id, dateDebut, dateFin);
+	}
 }

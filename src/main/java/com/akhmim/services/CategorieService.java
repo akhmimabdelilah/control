@@ -45,8 +45,8 @@ public class CategorieService implements IDao<Categorie> {
 		return repository.findAll();
 	}
 
-	public List<Categorie> findByCategorie(Categorie categorie) {
-		return repository.findByCategorie(categorie);
+	public List<Categorie> findByCategorieparent(Categorie categorie) {
+		return repository.findByCategorieparent(categorie);
 	}
 
 }

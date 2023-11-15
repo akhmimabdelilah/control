@@ -2,6 +2,8 @@ package com.akhmim.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -17,16 +19,21 @@ public class Categorie {
 	private long id;
 	private String nom;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "categorie", fetch = FetchType.EAGER)
 	private List<Article> articles;
 
+	@JsonIgnore
 	@ManyToOne
-	private Categorie categorieParent;
-	@OneToMany(mappedBy = "categorieParent", fetch = FetchType.EAGER)
-	private List<Categorie> categoriesParent;
+	private Categorie categorieparent;
 
 	public Categorie() {
 		super();
+	}
+
+	public Categorie(long id) {
+		super();
+		this.id = id;
 	}
 
 	public Categorie(String nom) {
@@ -38,6 +45,28 @@ public class Categorie {
 		super();
 		this.id = id;
 		this.nom = nom;
+	}
+
+	public Categorie(long id, String nom, Categorie categorieparent) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.categorieparent = categorieparent;
+	}
+
+	public Categorie(long id, String nom, List<Article> articles, Categorie categorieparent) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.articles = articles;
+		this.categorieparent = categorieparent;
+	}
+
+	public Categorie(long id, String nom, List<Article> articles) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.articles = articles;
 	}
 
 	public long getId() {
@@ -54,6 +83,22 @@ public class Categorie {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public List<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
+	}
+
+	public Categorie getCategorieparent() {
+		return categorieparent;
+	}
+
+	public void setCategorieparent(Categorie categorieparent) {
+		this.categorieparent = categorieparent;
 	}
 
 }

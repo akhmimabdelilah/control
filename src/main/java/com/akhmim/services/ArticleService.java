@@ -1,5 +1,6 @@
 package com.akhmim.services;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,10 @@ public class ArticleService implements IDao<Article> {
 	@Override
 	public List<Article> findAll() {
 		return repository.findAll();
+	}
+
+	public List<Article> findByCategorieBetweenDate(long id, Date dateDebut, Date dateFin) {
+		return repository.findByCategorieBetweenDate(id, dateDebut, dateFin);
 	}
 
 }

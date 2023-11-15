@@ -69,9 +69,9 @@ public class CategorieController {
 		return service.create(categorie);
 	}
 
-	@GetMapping("/categorie")
-	public List<Categorie> findCategorieByCategorie(@RequestBody Categorie categorie) {
-		return service.findByCategorie(categorie);
+	@GetMapping("/subcategory")
+	public List<Categorie> findCategorieByCategorieparent(@RequestBody Categorie categorie) {
+		return service.findByCategorieparent(categorie);
 	}
 
 }
